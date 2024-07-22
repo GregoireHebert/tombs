@@ -82,7 +82,7 @@ static ZEND_INI_MH(zend_tombs_ini_update_dump)
         return FAILURE;
     }
 
-    zend_tombs_ini_dump = zend_atoi(ZSTR_VAL(new_value), ZSTR_LEN(new_value));
+    zend_tombs_ini_dump = zend_ini_parse_quantity_warn(new_value, entry->name);
 
     return SUCCESS;
 }
@@ -123,7 +123,7 @@ ZEND_INI_BEGIN()
 ZEND_INI_END()
 
 void zend_tombs_ini_startup() {
-    zend_register_ini_entries_ex(ini_entries, -1);
+    zend_register_ini_entries_ex(ini_entries, -1, -1);
 }
 
 void zend_tombs_ini_shutdown() {

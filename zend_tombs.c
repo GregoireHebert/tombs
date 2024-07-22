@@ -130,6 +130,8 @@ static int zend_tombs_startup(zend_extension *ze) {
     zend_execute_function = zend_execute_ex;
     zend_execute_ex       = zend_tombs_execute;
 
+    php_printf("The extension %s is loaded and working!\r\n", "test");
+
     return SUCCESS;
 }
 
@@ -143,6 +145,7 @@ static void zend_tombs_shutdown(zend_extension *ze) {
     }
 
     if (zend_tombs_ini_dump > 0) {
+        php_printf("The extension %s is dumping the graveyard!\r\n", "test");
         zend_tombs_graveyard_dump(zend_tombs_graveyard, zend_tombs_ini_dump);
     }
 
@@ -153,6 +156,8 @@ static void zend_tombs_shutdown(zend_extension *ze) {
     zend_tombs_ini_shutdown();
 
     zend_execute_ex = zend_execute_function;
+
+    php_printf("The extension %s is shutting down!\r\n", "test");
 
     zend_tombs_started = 0;
 }
